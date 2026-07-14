@@ -2,6 +2,8 @@
 
 ElevateHR is a secure, responsive, and premium web application built using a Node.js backend (Clean Architecture) and a Vite-React frontend (Tailwind CSS). The system integrates full Role-Based Access Control (RBAC), automatic Refresh Token Rotation, database aggregation pipelines, and secure profile photo uploads mediated through Cloudinary.
 
+**🌐 Live Demo**: [https://elevatehr-p23n.onrender.com](https://elevatehr-p23n.onrender.com)
+
 ---
 
 ## 📂 Project Architecture (Monorepo)
@@ -60,6 +62,21 @@ ElevateHR is a secure, responsive, and premium web application built using a Nod
 ## 📡 REST API Endpoint Specifications
 
 All endpoints are prefixed with `/api/v1`.
+
+### API Summary Table
+
+| Method     | Endpoint               | Allowed Roles         | Description                                              | Request Body / Query Params                                                             |
+| :--------- | :--------------------- | :-------------------- | :------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| **POST**   | `/auth/login`          | Public                | Authenticates credentials & returns tokens               | `{ email, password }`                                                                   |
+| **POST**   | `/auth/refresh`        | Public                | Rotates Access & Refresh tokens                          | `{ refreshToken }`                                                                      |
+| **POST**   | `/auth/logout`         | Authenticated         | Clears active refresh tokens on database                 | `{ refreshToken }`                                                                      |
+| **GET**    | `/employees`           | `HR`, `Manager`       | Lists employees (with pagination, sorting, filters)      | _Query: search, status, sortBy, sortOrder, page, limit_                                 |
+| **POST**   | `/employees`           | `HR`                  | Registers a new employee profile                         | `{ name, email, password, department, designation, salary, role, status, joiningDate }` |
+| **GET**    | `/employees/:id`       | `HR`, `Manager`, Self | Retrieves profile details of a single user               | None                                                                                    |
+| **PATCH**  | `/employees/:id`       | `HR`, Self            | Updates employee parameters (Self locked to basic info)  | `{ name, email, password }` _(Self)_ or Full Entity _(HR)_                              |
+| **PATCH**  | `/employees/:id/photo` | `HR`, Self            | Uploads profile picture to Cloudinary storage            | `multipart/form-data` _(field: `photo`)_                                                |
+| **DELETE** | `/employees/:id`       | `HR`                  | Permanently deletes employee document                    | None                                                                                    |
+| **GET**    | `/dashboard`           | `HR`, `Manager`       | Fetches active metrics, salary graphs, and joined counts | None                                                                                    |
 
 ### 1. Authentication Resource (`/auth`)
 
@@ -155,9 +172,9 @@ JWT_EXPIRES_IN=15m
 REFRESH_TOKEN_SECRET=your_refresh_signing_key_secret
 REFRESH_TOKEN_EXPIRES_IN=7d
 
-CLOUDINARY_CLOUDNAME=dr98n7qxv
-CLOUDINARY_API_KEY=991355581862441
-CLOUDINARY_SECRET=7svz4r204PLRA1ZTSDsyVm599To
+CLOUDINARY_CLOUDNAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_SECRET=
 ```
 
 ### Installation
