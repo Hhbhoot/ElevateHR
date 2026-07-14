@@ -2,7 +2,8 @@
 
 ElevateHR is a secure, responsive, and premium web application built using a Node.js backend (Clean Architecture) and a Vite-React frontend (Tailwind CSS). The system integrates full Role-Based Access Control (RBAC), automatic Refresh Token Rotation, database aggregation pipelines, and secure profile photo uploads mediated through Cloudinary.
 
-**🌐 Live Demo**: [https://elevatehr-p23n.onrender.com](https://elevatehr-p23n.onrender.com)
+**🌐 Live Demo**: [https://elevatehr-p23n.onrender.com](https://elevatehr-p23n.onrender.com)  
+**💻 GitHub Repository**: [https://github.com/Hhbhoot/ElevateHR](https://github.com/Hhbhoot/ElevateHR)
 
 ---
 
